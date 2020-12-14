@@ -161,7 +161,7 @@ import requests
 # getNumList 主要在每組最低人數下, 將不足 10 人的分組
 # 平均分配至各組
 def getNumList(total, eachGrp=10):
-    print(total)
+    #print(total)
     # total 為學生人數
     # 至少每組都要確保有十名學生，因此
     # eachGrp = 10;
@@ -172,42 +172,42 @@ def getNumList(total, eachGrp=10):
     
     #丟一些空位清單
     splits = []
-    # find remainder when total number divid into "grpNum" number of group
+    #當總數分為"組數"之後找到餘數
     remainder = total % grpNum
-    # number of people in one group by calculation
+    #並計算一組的人數
     calGrp = total // grpNum
        
     for i in range(grpNum):
         splits.append(calGrp)
            
-    # check first splits
-    #print(splits)
+    #檢查分組
+    print(splits)
     for i in range(remainder):
         splits[i] += 1
        
-    # check final splits
+    #檢查餘數分下來後，最後的分組
     #print(splits);
     return splits;
 
 # 儲存學生名單資料的 url
 target_url = "https://nfulist.herokuapp.com/?semester=1091&amp;courseno=0776"
-# 利用 requests 讀取 url 中的資料
+#利用requests讀取url中的資料
 f = requests.get(target_url)
-# get student list from target_url
-# 利用 splitlines() 將資料放入數列 studList
+#從target_url獲得學生名單
+#利用 splitlines() 將資料放入數列 studList
 studList = f.text.splitlines()
-# 每組預計分組的最低人數
+#每組預計分組的最低人數
 num_in_one_group = 10
-# 每組學員暫存數列
+#每組學員暫存數列
 gpList = []
-# 全班分組數列
+#全班分組數列
 group = []
-# 各組人數數列
+#各組人數數列
 numList = []
-# get numList
+#get numList
 numList = getNumList(len(studList), num_in_one_group)
-# check numList
-# 列出已經補齊的各組人數數列
+#check numList
+#列出已經補齊的各組人數數列
 print("預計各組人數數列:" + str(numList))
    
 output = ""
@@ -258,7 +258,7 @@ for i in range(len(group)):
     gth = gth + 1
        
 print(output)</pre>
-<p></p><h1>問題集錦</h1>
+<h2>HW3 - PRACTICE PYTHON</h2><h1>問題集錦</h1>
 <p><img src="https://i.pinimg.com/564x/54/37/3d/54373d10578a2e7874f15d0945b593a8.jpg"/></p>
 <h2>問題1-4</h2>
 <div class="message-2qnXI6 cozyMessage-3V1Y8y groupStart-23k01U wrapper-2a6GCs cozy-3raOZG zalgo-jN1Ica" id="chat-messages-767980233571041280" role="group" tabindex="-1">
