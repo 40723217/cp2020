@@ -268,8 +268,55 @@ print(output)</pre>
 <p><a href="https://www.practicepython.org/exercise/2017/02/06/34-birthday-json.html">34-Json的生日(從檔案汲取資料)</a></p>
 <p><a href="https://www.kaggle.com/antirain/cp2020hw3/edit">kaggle功課完成網站位置</a></p>
 <p>其我個人見解與解答將會在下一頁揭示</p><h3>16-密碼生成器</h3>
-<h3>22-讀取文件檔案</h3>
-<h3>27-井字遊戲</h3>
+<p>首先我們來看看參考解答(雖然我的解答都是看解答然後去找怎麼做的):</p>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">#Python練習-16 PRACTICE PYTHON
+#密碼生成器
+#載入字詞生成系統
+import string
+#載入隨機系統
+import random
+#打印需要的密碼數量
+print('How many characters in your password?')
+#設計密碼計算方式
+def password(size = 8, chars=string.ascii_letters + string.digits + string.punctuation):
+    return ''.join(random.choice(chars) for _ in range(size))
+print('請輸入數字:',end= '')
+#輸入並打印密碼
+print('這是你的密碼:'+password(int(input())))</pre>
+<p>首先我們來看看第一行</p>
+<p>import string<br/>這個意旨生成一些字元，參考<a href="https://pymotw.com/2/string/">PyMOTW</a>的String項目可以知道，String可以這樣生成字元</p>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">ascii_letters='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+ascii_lowercase='abcdefghijklmnopqrstuvwxyz'
+ascii_uppercase='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+digits='0123456789'
+hexdigits='0123456789abcdefABCDEF'
+letters='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+lowercase='abcdefghijklmnopqrstuvwxyz'
+octdigits='01234567'
+printable='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&amp;\'()*+,-./:;&lt;=&gt;?@[\\]^_`{|}~ \t\n\r\x0b\x0c'
+punctuation='!"#$%&amp;\'()*+,-./:;&lt;=&gt;?@[\\]^_`{|}~'
+uppercase='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+whitespace='\t\n\x0b\x0c\r '</pre>
+<pre>因此我們會需要它<br/>接著是隨機的Random，參考<a href="https://docs.python.org/zh-tw/3/library/random.html">python.org</a>得知，Random有不少可以使用的指令<br/>而參考答案中使用了<code class="sig-prename descclassname">random.</code><code class="sig-name descname">choice，其原因是它可以更改一個字串的各個字元<br/></code></pre>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">random.choice（seq）
+從非空序列seq返回一個隨機元素。如果seq為空，則引發IndexError。</pre>
+<pre>接著就來搭配使用，先將這兩個系統import進來<br/>並且也能讓使用者決定自己要用多少個密碼<br/>接著開始定義密碼這個部分，使用def定義密碼password，後面開始設計密碼<br/>這串密碼的代碼是string.ascii_letters·string.digits、string.punctuation所組成<br/>所以所有符號都有包含在內<br/><br/>隨後讓使用者將輸入的數字變成字串數量，平均分配給每個字元<br/>使用size變量然後讓random打散後，打印回給使用者<br/><br/>參考網站:<br/><a href="https://www.w3schools.com/python/python_functions.asp">w3schools</a> <a href="https://www.itread01.com/content/1544997266.html">itread01</a> <a href="https://blog.csdn.net/songyunli1111/article/details/78079904">csdn</a><br/><br/></pre><h3>22-讀取文件檔案</h3>
+<p>總之，一樣上參考解答</p>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">counter_dict = {}
+with open('Training_01.txt') as f:
+	line = f.readline()
+	while line:
+		line = line[3:-26]
+		if line in counter_dict:
+			counter_dict[line] += 1
+		else:
+			counter_dict[line] = 1
+		line = f.readline()
+
+print(counter_dict)</pre>
+<p>讓我們來看看這串代碼，但我現在遇到最大的問題無非是，它不知道該開什麼檔案</p>
+<p>這點我到現在還是沒有解答，這裡有誰能直搗一下如何在kaggle開文件嗎?</p>
+<p>不過之後的就好處理了，把那些東西列出來之後開始讀寫，並且將他們分組。</p><h3>27-井字遊戲</h3>
 <h3>34-Json的生日(從檔案汲取資料)</h3><h1>問題集錦</h1>
 <p><img src="https://i.pinimg.com/564x/54/37/3d/54373d10578a2e7874f15d0945b593a8.jpg"/></p>
 <h2>問題1-4</h2>
