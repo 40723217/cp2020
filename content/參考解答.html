@@ -87,6 +87,7 @@ img.add_border {
 </head>
 <body>
 <div class='container'><nav>
+        
     <div class="site-wrap">
 
     <div class="site-mobile-menu">
@@ -132,4 +133,159 @@ img.add_border {
           </div>
           
         </header>
-    </nav><section><h1>Site Map</h1><div id="tipue_search_content"></div><ul><li><a href='林立翔的網站.html'>林立翔的網站</a><ul><li><a href='組員名單.html'>組員名單</a></li></ul><li><a href='功課集錦.html'>功課集錦</a><ul><li><a href='HW1 - PC Hardware.html'>HW1 - PC Hardware</a><ul><li><a href='PCH 0 - Page1 導言.html'>PCH 0 - Page1 導言</a><li><a href='Page2.html'>Page2</a><li><a href='Page3.html'>Page3</a><li><a href='Page4.html'>Page4</a><li><a href='PCH 1 - Page5 基礎.html'>PCH 1 - Page5 基礎</a><li><a href='Page6.html'>Page6</a><li><a href='page7.html'>page7</a><li><a href='page8.html'>page8</a><li><a href='page9.html'>page9</a><li><a href='page10.html'>page10</a><li><a href='page11.html'>page11</a><li><a href='page12.html'>page12</a></li></ul><li><a href='HW2 - 亂數分組.html'>HW2 - 亂數分組</a><ul><li><a href='參考解答.html'>參考解答</a><li><a href='製作程式-1.html'>製作程式-1</a></li></ul><li><a href='HW3 - PRACTICE PYTHON 練習Python.html'>HW3 - PRACTICE PYTHON 練習Python</a><ul><li><a href='16-密碼生成器.html'>16-密碼生成器</a><li><a href='22-讀取文件檔案.html'>22-讀取文件檔案</a><li><a href='27-井字遊戲.html'>27-井字遊戲</a><li><a href='34-Json的生日(從檔案汲取資料).html'>34-Json的生日(從檔案汲取資料)</a></li></li></ul></ul><li><a href='問題集錦.html'>問題集錦</a><ul><li><a href='問題1-4.html'>問題1-4</a></li></ul></section></div></body></html>
+    <div id="tipue_search_content">HW2 - 亂數分組 << <a href='HW2 - 亂數分組.html'>Previous</a> <a href='製作程式-1.html'>Next</a> >> 製作程式-1<br /><h1>參考解答</h1>
+<p>首先我們來看看老師的參考答案</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import random
+import requests
+
+# getNumList 主要在每組最低人數下, 將不足 10 人的分組
+# 平均分配至各組
+def getNumList(total, eachGrp=10):
+    #print(total)
+    # total 為學生人數
+    # 至少每組都要確保有十名學生，因此
+    # eachGrp = 10;
+    # 可以分為"grpNum"(號碼)組
+    grpNum = total // eachGrp;
+    # 檢查grpNum
+    #print(grpNum) = 5
+    
+    #丟一些空位清單
+    splits = []
+    #當總數分為"組數"之後找到餘數
+    remainder = total % grpNum
+    #並計算一組的人數
+    calGrp = total // grpNum
+       
+    for i in range(grpNum):
+        splits.append(calGrp)
+           
+    #檢查分組
+    print(splits)
+    for i in range(remainder):
+        splits[i] += 1
+       
+    #檢查餘數分下來後，最後的分組
+    #print(splits);
+    return splits;
+
+# 儲存學生名單資料的 url
+target_url = "https://nfulist.herokuapp.com/?semester=1091&amp;courseno=0776"
+#利用requests讀取url中的資料
+f = requests.get(target_url)
+#從target_url獲得學生名單
+#利用 splitlines() 將資料放入數列 studList
+studList = f.text.splitlines()
+#每組預計分組的最低人數
+num_in_one_group = 10
+#每組學員暫存數列
+gpList = []
+#全班分組數列
+group = []
+#各組人數數列
+numList = []
+#get numList
+numList = getNumList(len(studList), num_in_one_group)
+#check numList
+#列出已經補齊的各組人數數列
+print("預計各組人數數列:" + str(numList))
+   
+output = ""
+gth = 1
+inc = 0
+   
+# 弄亂 studList
+random.shuffle(studList)
+output += "以下為尚未排序前的各組學員學號: \n"
+for i in numList:
+    # 列印區隔符號
+    output += '=' * 20 + "\n";
+    output += "group " + str(gth) + " 有 " + str(i) + " 人: \n"
+    # 每組學員暫存數列, 在此 reset
+    gpList = []
+    for j in range(i):
+        output += studList[j+inc] + "\n"
+        # 在各分組數列中加入將對應的學員學號
+        gpList.append(studList[j+inc])
+         
+    gth = gth + 1
+    inc = inc + j
+    # 將各組學員數列依照學號排序
+    gpList.sort()
+    group.append(gpList)
+   
+# 列出尚未排序前的分組結果
+print(output)
+# 列出已經完成排序的分組數列
+print("已經排序後的分組數列:" + str(group))
+   
+output = ""
+# 列出已經排序後的分組名單
+output += '=' * 25 + "\n"
+output += '以下為排序後的各組成員名單:\n'
+gth = 1
+   
+# 先列出純文字以 \n 跳行組員資料
+for i in range(len(group)):
+    # 列印區隔符號
+    output += '=' * 20 + "\n"
+    output += "group" + str(gth) + "\n"
+    gpList = []
+       
+    for j in range(len(group[i])):
+        output += str(group[i][j]) + "\n"
+         
+    gth = gth + 1
+       
+print(output)</pre>
+<p>其實這段是挺高階且相當長的一個命令列<br/>我認為我需要花點時間來個別拆解這個命令列，並且融進我的部分解答當中</p><br />HW2 - 亂數分組 << <a href='HW2 - 亂數分組.html'>Previous</a> <a href='製作程式-1.html'>Next</a> >> 製作程式-1</div>
+        
+    <!-- footer -->
+      <div class="container">
+        <div class="row pt-3 mx-auto">
+            <p>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+        </div>
+      </div>
+    <!-- for footer -->
+    
+        </div> <!-- for site wrap -->
+            <!-- <script src="../cmsimde/static/chimper/js/jquery-3.3.1.min.js"></script> -->
+            <script src="../cmsimde/static/chimper/js/jquery-migrate-3.0.1.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/jquery-ui.js"></script>
+            <script src="../cmsimde/static/chimper/js/popper.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/bootstrap.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/owl.carousel.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/jquery.stellar.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/jquery.countdown.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/jquery.magnific-popup.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/bootstrap-datepicker.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/aos.js"></script>
+            <!--
+            <script src="../cmsimde/static/chimper/js/typed.js"></script>
+                    <script>
+                    var typed = new Typed('.typed-words', {
+                    strings: ["Web Apps"," WordPress"," Mobile Apps"],
+                    typeSpeed: 80,
+                    backSpeed: 80,
+                    backDelay: 4000,
+                    startDelay: 1000,
+                    loop: true,
+                    showCursor: true
+                    });
+                    </script>
+            -->
+            <script src="../cmsimde/static/chimper/js/main.js"></script>
+        
+<!-- 啟用 LaTeX equations 編輯 -->
+  <!-- <script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\(', '\)']]}
+  };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>-->
+    </body></html>
+        

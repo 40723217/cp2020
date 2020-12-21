@@ -87,6 +87,7 @@ img.add_border {
 </head>
 <body>
 <div class='container'><nav>
+        
     <div class="site-wrap">
 
     <div class="site-mobile-menu">
@@ -132,4 +133,76 @@ img.add_border {
           </div>
           
         </header>
-    </nav><section><h1>Site Map</h1><div id="tipue_search_content"></div><ul><li><a href='林立翔的網站.html'>林立翔的網站</a><ul><li><a href='組員名單.html'>組員名單</a></li></ul><li><a href='功課集錦.html'>功課集錦</a><ul><li><a href='HW1 - PC Hardware.html'>HW1 - PC Hardware</a><ul><li><a href='PCH 0 - Page1 導言.html'>PCH 0 - Page1 導言</a><li><a href='Page2.html'>Page2</a><li><a href='Page3.html'>Page3</a><li><a href='Page4.html'>Page4</a><li><a href='PCH 1 - Page5 基礎.html'>PCH 1 - Page5 基礎</a><li><a href='Page6.html'>Page6</a><li><a href='page7.html'>page7</a><li><a href='page8.html'>page8</a><li><a href='page9.html'>page9</a><li><a href='page10.html'>page10</a><li><a href='page11.html'>page11</a><li><a href='page12.html'>page12</a></li></ul><li><a href='HW2 - 亂數分組.html'>HW2 - 亂數分組</a><ul><li><a href='參考解答.html'>參考解答</a><li><a href='製作程式-1.html'>製作程式-1</a></li></ul><li><a href='HW3 - PRACTICE PYTHON 練習Python.html'>HW3 - PRACTICE PYTHON 練習Python</a><ul><li><a href='16-密碼生成器.html'>16-密碼生成器</a><li><a href='22-讀取文件檔案.html'>22-讀取文件檔案</a><li><a href='27-井字遊戲.html'>27-井字遊戲</a><li><a href='34-Json的生日(從檔案汲取資料).html'>34-Json的生日(從檔案汲取資料)</a></li></li></ul></ul><li><a href='問題集錦.html'>問題集錦</a><ul><li><a href='問題1-4.html'>問題1-4</a></li></ul></section></div></body></html>
+    <div id="tipue_search_content">參考解答 << <a href='參考解答.html'>Previous</a> <a href='HW3 - PRACTICE PYTHON 練習Python.html'>Next</a> >> HW3 - PRACTICE PYTHON 練習Python<br /><h1>製作程式-1</h1>
+<p>這邊也只有一點進展:<br/>我採用了urllib.request來擷取課表上的學員名單<br/>然後使用</p>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false"># 先創造一個處理url的儲藏庫
+import urllib.request
+# 接著導入URL:https://nfulist.herokuapp.com/?semester=1091&amp;courseno=0776 設計一乙學號清單
+target_url = "https://nfulist.herokuapp.com/?semester=1091&amp;courseno=0776"
+# 接著創建一個空白區域放置這些學號
+cp20201b = []
+
+for line in urllib.request.urlopen(target_url):
+    cp20201b.append(line.decode('utf-8'))
+    
+print(cp20201b)
+# 但是我們多了後面的\n，我們需要先處理它們。</pre>
+<p>得到的結果是這個</p>
+<p><img alt="" height="87" src="./../images/chrome_9KSADmnQ2F.png" width="1206"/></p>
+<p>這時我就在思考，<span>urllib.request與requests有何差別?<br/>於是我開始詢問我的好朋友，<a href="https://www.itread01.com/content/1542815047.html">Google<br/></a>得知了requests會更好用一些，但是我不確定我這個命令列變換為requests會不會出問題，於是我再次做了測試<br/>好的，我們獲得了一樣的結果。</span></p>
+<p><span>後來根據參考解答，發現老師是使用<a href="https://blog.gtwang.org/programming/python-requests-module-tutorial/">requests.get</a>與<a href="http://tw.gitbook.net/python/string_splitlines.html">text.splitlines</a>來進行拆解<br/>於是我上網查了一下他們的使用方法，得知了這些的使用方法如下</span></p>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false"># 使用 GET 方式下載普通網頁
+r = requests.get('https://www.google.com.tw/')
+# 這裡我不清楚前面text的意思，但知道splitlines是將那些換行的符號做成數列</pre>
+<p>最後，完成！</p>
+<p><img alt="" height="161" src="./../images/chrome_lLwiHVGSCQ.png" width="1063"/></p><br />參考解答 << <a href='參考解答.html'>Previous</a> <a href='HW3 - PRACTICE PYTHON 練習Python.html'>Next</a> >> HW3 - PRACTICE PYTHON 練習Python</div>
+        
+    <!-- footer -->
+      <div class="container">
+        <div class="row pt-3 mx-auto">
+            <p>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+        </div>
+      </div>
+    <!-- for footer -->
+    
+        </div> <!-- for site wrap -->
+            <!-- <script src="../cmsimde/static/chimper/js/jquery-3.3.1.min.js"></script> -->
+            <script src="../cmsimde/static/chimper/js/jquery-migrate-3.0.1.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/jquery-ui.js"></script>
+            <script src="../cmsimde/static/chimper/js/popper.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/bootstrap.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/owl.carousel.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/jquery.stellar.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/jquery.countdown.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/jquery.magnific-popup.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/bootstrap-datepicker.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/aos.js"></script>
+            <!--
+            <script src="../cmsimde/static/chimper/js/typed.js"></script>
+                    <script>
+                    var typed = new Typed('.typed-words', {
+                    strings: ["Web Apps"," WordPress"," Mobile Apps"],
+                    typeSpeed: 80,
+                    backSpeed: 80,
+                    backDelay: 4000,
+                    startDelay: 1000,
+                    loop: true,
+                    showCursor: true
+                    });
+                    </script>
+            -->
+            <script src="../cmsimde/static/chimper/js/main.js"></script>
+        
+<!-- 啟用 LaTeX equations 編輯 -->
+  <!-- <script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\(', '\)']]}
+  };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>-->
+    </body></html>
+        
