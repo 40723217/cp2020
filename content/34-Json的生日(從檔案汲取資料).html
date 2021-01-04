@@ -133,7 +133,49 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">27-井字遊戲 << <a href='27-井字遊戲.html'>Previous</a> <a href='問題集錦.html'>Next</a> >> 問題集錦<br /><h1>34-Json的生日(從檔案汲取資料)</h1><br />27-井字遊戲 << <a href='27-井字遊戲.html'>Previous</a> <a href='問題集錦.html'>Next</a> >> 問題集錦</div>
+    <div id="tipue_search_content">27-井字遊戲 << <a href='27-井字遊戲.html'>Previous</a> <a href='問題集錦.html'>Next</a> >> 問題集錦<br /><h1>34-Json的生日(從檔案汲取資料)</h1>
+<p>Json生日的解ˋ決方案<br/>練習34<br/><br/>此練習是生日數據練習系列4的第2部分。 其他練習是：第1部分，第3部分和第4部分。<br/><br/>在上一個練習中，我們創建了著名科學家生日字典。 在本練習中，請修改第1部分中的程序，以從磁盤上的JSON文件加載生日字典，而不是在程序中定義字典。<br/><br/>獎勵：要求用戶提供另一個科學家的名字和生日，以添加到詞典中，並使用科學家的名字更新磁盤上的JSON文件。 如果您多次運行該程序並繼續添加新名稱，那麼JSON文件應該會越來越大。</p>
+<p>這個程序很明顯，我們需要一個名為birthdays的json的檔案才可以得以運行。</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import json
+
+birthday = {}
+with open('birthdays.json', 'r') as f:
+          birthday = json.load(f)
+
+def add_entry():
+    name = input('Who do you want to add to the Birthday Dictionnary?\n').title()
+    date = input('When is {} born?\n'.format(name))
+    birthday[name] = date
+    with open('birthdays.json', 'w') as f:
+        json.dump(birthday, f)
+    print('{} was added to my birthday list\n'.format(name))
+
+def find_date():
+    name = input("who's birthday do you want to know?\n").title()
+    try :
+        if birthday[name]:
+            print('{} is born on {}\n'.format(name, birthday[name]))
+    except KeyError:
+        print('{} is not in the list\n'.format(name))
+
+def list_entries():
+    print('The current entries in my birthday list are:\n============================================')
+    for key in birthday:
+        print(key.ljust(31), ':', birthday[key])
+    print()
+
+while True:
+    what_next = input('What do you want to do next? you can: Add, Find, List, Quit\n').capitalize()
+    if what_next == 'Quit':
+        print('Good Bye')
+        raise SystemExit(0)
+    elif what_next == 'Add':
+        add_entry()
+    elif what_next == 'Find':
+        find_date()
+    elif what_next == 'List':
+        list_entries()</pre>
+<p></p><br />27-井字遊戲 << <a href='27-井字遊戲.html'>Previous</a> <a href='問題集錦.html'>Next</a> >> 問題集錦</div>
         
     <!-- footer -->
       <div class="container">
