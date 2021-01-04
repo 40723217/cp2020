@@ -376,6 +376,42 @@ if line_match(numpy.transpose(game)) &gt; 0:
 	print (str(line_match(numpy.transpose(game))) + str(" column wins!"))
 if diagonal_match(game) &gt; 0:
 	print (str(diagonal_match(game)) + str(" diagonal wins!"))</pre>
+<pre>以下是需要pygame才能啟動的</pre>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#需要擁有pygame程式下才能進行
+import pygame, sys
+
+pygame.init()
+
+WIDTH = 600
+HEIGHT = 600
+#RGB顏色調整
+RED = (255, 0, 0)
+BG_COLOR = (28, 170, 156)
+LINE_COLOR = (23, 145, 135)
+
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+#頂部標題
+pygame.display.set_caption('Tic Tac Toe')
+screen.fill( BG_COLOR )
+
+pygame.draw.line( screen, RED, (10, 10), (300, 300), 10 )
+
+def draw_lines();
+    #九宮格畫,橫第一條
+    pygame.draw.line( screen, LINE_COLOR, (0, 200), (600, 200), LINE_WIDTH )
+    #九宮格畫,橫第二條
+    pygame.draw.line( screen, LINE_COLOR, (0, 400), (600, 400), LINE_WIDTH )
+    
+    #九宮格畫,直第一條
+    pygame.draw.line( screen, LINE_COLOR, (200, 0), (200, 600), LINE_WIDTH )
+    #九宮格畫,直第二條
+    pygame.draw.line( screen, LINE_COLOR, (400, 0), (400, 600), LINE_WIDTH )
+
+#頂部選單
+while True:
+    for event in pygame.event.get();
+        if event.type == pygame.QUIT:
+            sys.exit()p</pre>
 <pre><br/><br/></pre><h3>34-Json的生日(從檔案汲取資料)</h3><h1>問題集錦</h1>
 &gt;&gt;&gt;&gt;&gt;&gt;&gt; 8a288fd766140d64561e6b1d79a6b75f490c66f2
 <p><img src="https://i.pinimg.com/564x/54/37/3d/54373d10578a2e7874f15d0945b593a8.jpg"/></p>
